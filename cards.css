@@ -36,6 +36,7 @@
   background-color: #282828;
   border-radius: 5px;
   margin-bottom: 10px;
+  display: block;
 }
 
 .card:hover {
