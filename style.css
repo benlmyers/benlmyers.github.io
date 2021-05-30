@@ -12,11 +12,11 @@ a {
 }
 
 a:hover {
-  text-decoration: underline;
+  color: white;
 }
 
 .main-content {
-  margin: 12px;
+  padding: 0 10%;
 }
 
 .card-label {
@@ -24,7 +24,20 @@ a:hover {
   font-weight: bold;
 }
 
+.image-button:hover {
+  opacity: 0.7;
+}
+
+.medium {
+  padding: 0px;
+  font-weight: normal;
+  margin: 0px;
+  font-size: 10pt;
+  color: #777777;
+}
+
 .small {
+  font-weight: bold;
   padding: 0px;
   margin: 0px;
   font-size: 8pt;
