@@ -9,3 +9,8 @@ body {
 .main-content {
   margin: 12px;
 }
+
+.social-label {
+  color: #888888;
+  font-weight: bold;
+}

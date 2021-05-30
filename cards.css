@@ -4,7 +4,7 @@
 
 @keyframes hover {
   from { margin-top: 0px;}
-  to { margin-top: -3px;}
+  to { margin-top: -2px;}
 }
 
 .column {
@@ -21,7 +21,7 @@
   clear: both;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .column {
     width: 100%;
     display: block;
@@ -39,7 +39,9 @@
 }
 
 .card:hover {
+  background-color: #303030;
   animation-name: hover;
-  animation-duration: 0.4s;
+  animation-duration: 0.3s;
   animation-fill-mode: forwards;
+  cursor: pointer;
 }
