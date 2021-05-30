@@ -1,0 +1,23 @@
+@keyframes hover2 {
+  from { border: 1px solid #434343; }
+  to { border: 1px solid #525252; }
+}
+
+.box {
+  border: 1px solid #434343;
+  border-radius: 5px;
+  text-align: center;
+  padding: 16px;
+  margin-bottom: 10px;
+  display: block;
+  color: #aaaaaa;
+  font-weight: bold;
+}
+
+.box:hover {
+  background: #191919;
+  animation-name: hover2;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  cursor: pointer;
+}
