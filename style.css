@@ -37,6 +37,18 @@ a:hover {
   cursor: pointer;
 }
 
+.side-button {
+  padding: 8px 12px;
+  margin: 0px 4px;
+  color: #bbbbff;
+  border-radius: 5px;
+}
+
+.side-button:hover {
+  background-color: #232323;
+  cursor: pointer;
+}
+
 .image-button:hover {
   opacity: 0.7;
 }
