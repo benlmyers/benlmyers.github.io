@@ -1,0 +1,81 @@
+@keyframes bar100 {
+  from { width: 0%; border-bottom-color: rgba(0,0,0,0); }
+  to { width: 100%; border-bottom-color: rgba(75,75,75,255); }
+}
+
+@keyframes bar90 {
+  from { width: 0%; border-bottom-color: rgba(0,0,0,0); }
+  to { width: 90%; border-bottom-color: rgba(75,75,75,255); }
+}
+
+@keyframes bar80 {
+  from { width: 0%; border-bottom-color: rgba(0,0,0,0); }
+  to { width: 80%; border-bottom-color: rgba(75,75,75,255); }
+}
+
+@keyframes bar70 {
+  from { width: 0%; border-bottom-color: rgba(0,0,0,0); }
+  to { width: 70%; border-bottom-color: rgba(75,75,75,255); }
+}
+
+@keyframes bar60 {
+  from { width: 0%; border-bottom-color: rgba(0,0,0,0); }
+  to { width: 60%; border-bottom-color: rgba(75,75,75,255); }
+}
+
+@keyframes bar50 {
+  from { width: 0%; border-bottom-color: rgba(0,0,0,0); }
+  to { width: 50%; border-bottom-color: rgba(75,75,75,255); }
+}
+
+@keyframes bar40 {
+  from { width: 0%; border-bottom-color: rgba(0,0,0,0); }
+  to { width: 40%; border-bottom-color: rgba(75,75,75,255); }
+}
+
+.language-header {
+  width: 150px;
+}
+
+.language-bar {
+  margin-top: -12px;
+  padding: 0px;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(.26,.81,.25,1);
+}
+
+.n100 {
+  animation-name: bar100;
+  border-bottom: 2px solid rgba(0,0,0,0);
+}
+
+.n90 {
+  animation-name: bar90;
+  border-bottom: 2px solid rgba(0,0,0,0);
+}
+
+.n80 {
+  animation-name: bar80;
+  border-bottom: 2px solid rgba(0,0,0,0);
+}
+
+.n70 {
+  animation-name: bar70;
+  border-bottom: 2px solid rgba(0,0,0,0);
+}
+
+.n60 {
+  animation-name: bar60;
+  border-bottom: 2px solid rgba(0,0,0,0);
+}
+
+.n50 {
+  animation-name: bar50;
+  border-bottom: 2px solid rgba(0,0,0,0);
+}
+
+.n40 {
+  animation-name: bar40;
+  border-bottom: 2px solid rgba(0,0,0,0);
+}
