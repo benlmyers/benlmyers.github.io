@@ -25,6 +25,13 @@ a:hover {
   color: white;
 }
 
+.project {
+  border: 1px solid #222222;
+  border-radius: 5px;
+  padding: 8px;
+  margin-bottom: 12px;
+}
+
 .main-content {
   padding: 48px 10%;
   padding-bottom: 48px;
