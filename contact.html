@@ -1,84 +1,92 @@
 <html>
-  <head>
-    <title>Ben Myers - Contact</title>
-    <script>
-      function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-      }
 
-      function copy(str, num) {
-        const el = document.createElement('textarea');
-        el.value = str;
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
-        document.getElementById('copy' + num).innerHTML = "Copied";
-        document.getElementById('copy' + num).style.color = 'gray';
-      }
-    </script>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="nav.css">
-    <link rel="stylesheet" href="cards.css">
-    <link rel="stylesheet" href="icon.css">
-    <link rel="stylesheet" href="box.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  </head>
-  <body>
-    <div class="nav">
-      <ul>
-        <li><a href="index.html"><b>Ben Myers</b></a></li>
-        <li><a href="index.html#resume">Resume</a></li>
-        <li><a href="index.html#career">Career</a></li>
-        <li><a href="index.html#papers">Papers</a></li>
-        <li><a href="index.html#cs">CS</a></li>
-        <li><a href="index.html#projects">Projects</a></li>
-        <li style="float:right"><a class="active" href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-    <div class="main-content">
-      <h1>Contact</h1>
-      <a href="index.html">← Back</a>
-      <p>There are many ways you can reach me. I most often check my email and text messages.</p>
-      <h2>Phone</h2>
-      <a href="#" class="fa fa-phone" id="ic"></a><b>Cell:</b> 561-374-4627
-      <a href="tel:5613744627" class="side-button" style="margin-left: 12px">Call</a>
-      <a href="sms:5613744627" class="side-button">SMS</a>
-      <a class="side-button" onclick="copy('5613744627', 1);" id="copy1">Copy</a>
-      <h2>Email</h2>
-      <a href="#" class="fa fa-envelope" id="ic"></a><b>Primary:</b> benl.myers01@gmail.com
-      <a href="mailto:benl.myers01@gmail.com" class="side-button" style="margin-left: 12px">Mail</a>
-      <a class="side-button" onclick="copy('benl.myers01@gmail.com', 2);" id="copy2">Copy</a>
-      <p>
+<head>
+  <title>Ben Myers - Contact</title>
+  <script>
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function copy(str, num) {
+      const el = document.createElement('textarea');
+      el.value = str;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      document.getElementById('copy' + num).innerHTML = "Copied";
+      document.getElementById('copy' + num).style.color = 'gray';
+    }
+  </script>
+  <link rel="stylesheet" href="resources/css/style.css">
+  <link rel="stylesheet" href="resources/css/nav.css">
+  <link rel="stylesheet" href="resources/css/cards.css">
+  <link rel="stylesheet" href="resources/css/icon.css">
+  <link rel="stylesheet" href="resources/css/box.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <div class="nav">
+    <ul>
+      <li><a href="index.html"><b>Ben Myers</b></a></li>
+      <li><a href="index.html#resume">Resume</a></li>
+      <li><a href="index.html#career">Career</a></li>
+      <li><a href="index.html#papers">Papers</a></li>
+      <li><a href="index.html#cs">CS</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li style="float:right"><a class="active" href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+  <div class="main-content">
+    <h1>Contact</h1>
+    <a href="index.html">← Back</a>
+    <p>There are many ways you can reach me. I most often check my email and text messages.</p>
+    <h2>Phone</h2>
+    <a href="#" class="fa fa-phone" id="ic"></a><b>Cell:</b> 561-374-4627
+    <a href="tel:5613744627" class="side-button" style="margin-left: 12px">Call</a>
+    <a href="sms:5613744627" class="side-button">SMS</a>
+    <a class="side-button" onclick="copy('5613744627', 1);" id="copy1">Copy</a>
+    <h2>Email</h2>
+    <a href="#" class="fa fa-envelope" id="ic"></a><b>Primary:</b> benl.myers01@gmail.com
+    <a href="mailto:benl.myers01@gmail.com" class="side-button" style="margin-left: 12px">Mail</a>
+    <a class="side-button" onclick="copy('benl.myers01@gmail.com', 2);" id="copy2">Copy</a>
+    <p>
       <a href="#" class="fa fa-envelope" id="ic"></a><b>Secondary:</b> benben28405678@gmail.com
       <a href="mailto:benben28405678@gmail.com" class="side-button" style="margin-left: 12px">Mail</a>
       <a class="side-button" onclick="copy('benben28405678@gmail.com', 3);" id="copy3">Copy</a>
-      <p>
+    <p>
       <a href="#" class="fa fa-envelope" id="ic"></a><b>Work:</b> ben@flowductive.com
       <a href="mailto:ben@flowductive.com" class="side-button" style="margin-left: 12px">Mail</a>
       <a class="side-button" onclick="copy('ben@flowductive.com', 4);" id="copy4">Copy</a>
-      <h2>Facebook</h2>
-      <a href="#" class="fa fa-facebook" id="ic"></a>Ben Myers
-      <a href="https://www.facebook.com/ben.myers.75641/" class="side-button" style="margin-left: 12px" target="_blank">Profile ↗</a>
-      <h2>LinkedIn</h2>
-      <a href="#" class="fa fa-linkedin" id="ic"></a>Ben Myers
-      <a href="https://www.linkedin.com/in/ben-myers-b617941a6/" class="side-button" style="margin-left: 12px" target="_blank">Profile ↗</a>
-      <h2>Instagram</h2>
-      <a href="#" class="fa fa-instagram" id="ic"></a>benlmyers
-      <a href="https://www.instagram.com/benlmyers/" class="side-button" style="margin-left: 12px" target="_blank">Profile ↗</a>
-      <h2>GitHub</h2>
-      <a href="#" class="fa fa-github" id="ic"></a>benlmyers
-      <a href="https://github.com/benlmyers" class="side-button" style="margin-left: 12px" target="_blank">Profile ↗</a>
-      <a href="https://github.com/benlmyers?tab=repositories" class="side-button" target="_blank">Repos ↗</a>
-      <h2>Stack</h2>
-      <a href="#" class="fa fa-stack-overflow" id="ic"></a>benben28405678
-      <a href="https://stackoverflow.com/users/12101201/ben-myers" class="side-button" style="margin-left: 12px" target="_blank">Profile ↗</a>
-      <h2>Reddit</h2>
-      <a href="#" class="fa fa-reddit-alien" id="ic"></a>benben28405678
-      <a href="https://www.reddit.com/user/benben28405678" class="side-button" style="margin-left: 12px" target="_blank">Profile ↗</a>
-      <h2>Discord</h2>
-      <a href="#" class="fa fa-gamepad" id="ic"></a>characterlim<span style="color:#777777">#7899</span>
-      <a onclick="copy('characterlim#7899', 4);" class="side-button" style="margin-left: 12px" id="copy4">Copy</a>
-    </div>
-  </body>
+    <h2>Facebook</h2>
+    <a href="#" class="fa fa-facebook" id="ic"></a>Ben Myers
+    <a href="https://www.facebook.com/ben.myers.75641/" class="side-button" style="margin-left: 12px"
+      target="_blank">Profile ↗</a>
+    <h2>LinkedIn</h2>
+    <a href="#" class="fa fa-linkedin" id="ic"></a>Ben Myers
+    <a href="https://www.linkedin.com/in/ben-myers-b617941a6/" class="side-button" style="margin-left: 12px"
+      target="_blank">Profile ↗</a>
+    <h2>Instagram</h2>
+    <a href="#" class="fa fa-instagram" id="ic"></a>benlmyers
+    <a href="https://www.instagram.com/benlmyers/" class="side-button" style="margin-left: 12px" target="_blank">Profile
+      ↗</a>
+    <h2>GitHub</h2>
+    <a href="#" class="fa fa-github" id="ic"></a>benlmyers
+    <a href="https://github.com/benlmyers" class="side-button" style="margin-left: 12px" target="_blank">Profile ↗</a>
+    <a href="https://github.com/benlmyers?tab=repositories" class="side-button" target="_blank">Repos ↗</a>
+    <h2>Stack</h2>
+    <a href="#" class="fa fa-stack-overflow" id="ic"></a>benben28405678
+    <a href="https://stackoverflow.com/users/12101201/ben-myers" class="side-button" style="margin-left: 12px"
+      target="_blank">Profile ↗</a>
+    <h2>Reddit</h2>
+    <a href="#" class="fa fa-reddit-alien" id="ic"></a>benben28405678
+    <a href="https://www.reddit.com/user/benben28405678" class="side-button" style="margin-left: 12px"
+      target="_blank">Profile ↗</a>
+    <h2>Discord</h2>
+    <a href="#" class="fa fa-gamepad" id="ic"></a>characterlim<span style="color:#777777">#7899</span>
+    <a onclick="copy('characterlim#7899', 4);" class="side-button" style="margin-left: 12px" id="copy4">Copy</a>
+  </div>
+</body>
+
 </html>
