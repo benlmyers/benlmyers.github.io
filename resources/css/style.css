@@ -1,5 +1,8 @@
-body {
+html {
   background-color: #181818;
+}
+
+body {
   color: #dddddd;
   padding: none;
   margin: 0;

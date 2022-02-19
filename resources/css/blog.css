@@ -1,0 +1,17 @@
+main {
+    color: white;
+}
+
+pre, blockquote {
+    background-color: #222222 !important;
+    border-radius: 5px;
+}
+
+code {
+    color: #bbbbbb !important;
+    font-family: 'Noto Sans Mono', monospace !important;
+}
+
+mjx-container {
+    color: rgb(202, 240, 255);
+}
