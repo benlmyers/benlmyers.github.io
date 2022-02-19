@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<script>window.texme = { style: 'plain' }</script>
+<script src="https://cdn.jsdelivr.net/npm/texme@1.1.0"></script>
+<link rel="stylesheet" href="../../../resources/css/style.css">
+<link rel="stylesheet" href="../../../resources/css/nav.css">
+<link rel="stylesheet" href="../../../resources/css/blog.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap" rel="stylesheet">
+
+<div class="nav">
+    <ul>
+        <li><a href="../../index.html"><b>Ben Myers</b> Blog</a></li>
+        <li>2022</li>
+        <li class="nav-arrow">▶</li>
+        <li>Jan</li>
+        <li class="nav-arrow">▶</li>
+        <li>Where do Numbers Come From?</li>
+        <li style="float:right"><a class="active" href="../../../index.html">Portfolio</a></li>
+    </ul>
+</div>
+
+<textarea>
+
+# Where do Numbers Come From?
+*Jan 30, 2022*
+
+Topic: **Mathematics**
+
+Requisite: **HS Mathematics**
+
+—
+
+For centuries, people have used numbers to quantify metrics. Whether it be for counting apples, measuring distance, or
+for performing calculations to launch a rocket into space, numbers have been integral in describing the world we live
+in. It is important, I believe, for us to understand where numbers come from, so we can better appreciate their
+importance as well as their rigorous formation.
+
+## A Historical Recount
+
+Since the dawn of humanity, humans have used counting methods to tabulate values. Ancient Mesopotamia was the first to
+develop a base system. The Ancient Egyptians and Greeks were the first to develop numerals, or symbols representing
+numbers. Today, in America, we use the Arabic numeral system ($1, 2, 3$) to represent numbers.
+
+With the development of a rigouros foundation of mathematics based on pure logic by Greek philosophers and
+mathematicians, it became imperative that numbers have a strict, mathematical definition based solely on logic.
+
+Today, I’ll explain that definition in more detail. We’ll discuss logic, how we can use logic to form objects called
+*sets*, and how we can use those sets to obtain $\mathbb{N}$, the natural numbers.
+
+## Logic
+
+We’ll start with logic. Logic is the study of sentential values, either **true** or **false**. For instance, the
+statement
+
+$$
+P = \text{“This is a blog”}
+$$
+
+is **true** while the statement
+
+$$
+Q = \text{“Pigs can fly”}
+$$
+
+is **false**.
+
+We can string logical statements together using **logical operators**. The most common logical operators are **AND**,
+**OR**, **NOT**, and **IF**. Here are some more details about logical operators:
+
+| Operator Name | Symbol | Type | Example |
+| --- | :---: | --- | --- |
+| AND | $\land$ | conjunction | “$P$ and $Q$ are both true” |
+| OR | $\lor$ | disjunction | “either $P$ or $Q$ are true” |
+| NOT | $\neg$ | negation | “not $P$ is true” |
+| IF | $\implies$ | conditional implication | “if $P$ is true, then $Q$ is true” |
+| IFF | $\iff$ | biconditional implication | “$P$ is true if and only if $Q$ is true” |
+| XOR | $\oplus$ | mutual exclusion | “either $P$ or $Q$ are true, but not both” |
+
+So, using the above statements for $P$ and $Q$, the following are equivalent:
+
+$$
+\begin{align}
+P \land Q &\iff \text{“This is a blog, and pigs can fly”} \\
+P \lor Q &\iff \text{“Either this is a blog, or pigs can fly”} \\
+P \implies Q &\iff \text{“If this is a blog, then pigs can fly”} \\
+\neg Q &\iff \text{“Pigs cannot fly”}
+\end{align}
+$$
+
+Great, we can now decompose statements into logic and connect them using our logical operators. But what if we have
+multiple similar statements, such as:
+
+$$
+\begin{align}
+P_1 &= \text{“Adam is a logician”} \\
+P_2 &= \text{“Ben is a logician”} \\
+P_3 &= \text{“Cary is a logician”} \\
+\vdots & \;\; \text{(and so on)}
+\end{align}
+$$
+
+This is too much work. Instead, we’ll use boolean algebra to **quantify** the above to
+
+$$
+P(x) = \text{“} x \text{ is a logician”}
+$$
+
+This is called a **predicate**, and it gives way to two new **quantifiers**:
+
+$$
+\begin{align}
+\forall x : P(x) &\iff \text{“For all } x \text{, } x \text{ is a logician”} \\
+\exists x : P(x) &\iff \text{“There exists an } x \text{ such that } x \text{ is a logician”}
+\end{align}
+$$
+
+We can use these quantifiers to formulate, from only logic, objects called…
+
+## Sets
+
+Sets are a collection of elements. For instance, the following are examples of sets:
+
+$$
+\begin{align}
+A &= \{\text{apple}, \text{orange}, \text{banana}\} \\
+B &= \{a, 12, \text{“cat”}, f(x)\} \\
+C &= \{1, 2, 3, 4, \cdots\} \\
+D &= \{x : x \text{ is even}\}
+\end{align}
+$$
+
+Sets can contain anything, and they never contain duplicates. Every element of a set is unique, and sets with the same
+elements are considered to be equal. Sets can contain other sets, and this will be important for us to know for later:
+
+$$
+\begin{align}
+A &= \{\{0\}, \{1, 2\}\} \\
+B &= \{1, 2, 3, \{1, 2\}, \{\}\}
+\end{align}
+$$
+
+And, as you can see from above, the **empty set** or **null set** exists, and is symbolized using $\varnothing$.
+
+And while items in sets can’t be explicitly *ordered*, we can form an ordered set (**ordered pair** or **tuple**) like
+so:
+
+$$
+(a, b) := \{a, \{a, b\}\}
+$$
+
+With tuples, order matters, and
+
+$$
+(a, b) \neq (b, a)
+$$
+
+Like sentential values, we can also use operators on sets. The typical operators for sets are **union** ($\cup$),
+**intersection** ($\cap$), and **difference** ($\smallsetminus$).
+
+Informally, we can define these operators as follows:
+
+$$
+\begin{align}
+A \cup B &:= \text{The set with elements of either A or B} \\
+A \cap B &:= \text{The set with elements of both A and B} \\
+A \smallsetminus B &:= \text{The set with elements of A, but not B}
+\end{align}
+$$
+
+For instance, if we let
+
+$$
+\begin{align}
+A &= \{1, 2, 3, 4\} \\
+B &= \{1, 2, 5\}
+\end{align}
+$$
+
+then
+
+$$
+\begin{align}
+A \cup B &= \{1, 2, 3, 4, 5\} \\
+A \cap B &= \{1, 2\} \\
+A \smallsetminus B &= \{3, 4\}
+\end{align}
+$$
+
+With this, we can finally define what a number is.
+
+## Numbers
+
+Let’s define $0$ to be the empty set. We use the symbol $:=$ to represent a definition. Then
+
+$$
+\begin{align}
+0 &:= \varnothing \\
+1 &:= \{0\} \\
+2 &:= \{0, 1\} \\
+3 &:= \{0, 1, 2\} \\
+\vdots
+\end{align}
+$$
+
+As you can see, the numbers are defined recursively. Each number is represented by a set of nested empty sets.
+
+Now, we need a way to increment our numbers. After all, it’s too much work to define *every single number*. So, we
+define the **successor function** to be
+
+$$
+s(x) := x \cup \{x\}
+$$
+
+If you’re confused by the above formula, it’s simply written as this: The next number ($x + 1$) is itself, in set form,
+unioned with the number itself. For instance, if we try to find $s(4)$, we know that it is the set $\{0, 1, 2, 3\}$ in
+union with $4$. So, $s(4) = 5 = \{0, 1, 2, 3, 4\}$. Now, we can always get to the next number given any number. This
+allows our numbers to be infinite!
+
+It’s these numbers, defined recursively from sets, that follow a set of axioms known as the Peano axioms. Since these
+numbers satisfy the axioms, they are considered to be a set of **natural numbers**, and can be represented with the
+symbol $\mathbb{N}$.
+
+—
+
+Tags: #mathematics #set-theory #number-theory #logic
+
+Sources:
+- [Wikipedia](https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers)
