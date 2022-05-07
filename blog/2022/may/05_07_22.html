@@ -365,18 +365,25 @@ Within `ContentView`, but before `var body: some View`, add the following variab
 - `@State var myMessage = ""`
 - `@State var allMessages = [String]()`
 
-Next, within `body`, remove the first button, `"Tap me!"`. Replace it with a `TextField`. You can give it any title you'd like, such as `"Your message:"`; then, pass your `myMessage` with *binding* to the text field using the `$` prefix:
+--
+
+Next, within `body`, remove the first button, `"Tap me!"`. Replace it with a `TextField`. You can give it any title you'd like, such as `"Your message:"`; then, pass your `myMessage` with *binding* to the text field:
+
 ```swift
-TextField("Your message:", text: $myMessage)
+TextField("Your message:", text: $myMessage) // $ is the binding operator
 ```
+
 Now, we need to ensure that the inputted message is being added, not `"Hello, world!"`. In the remaining button's action code, remove
 ```swift
 let newMessage = "Hello, world!"
 ```
+
 as we no longer need the placeholder message, and change `data.messages.append(newMessage)` to
+
 ```swift
 data.messages.append(myMessage)
 ```
+
 to reflect this change.
 
 😅 Ok, that was a lot of code. Let's review `ContentView` to make sure we have everything.

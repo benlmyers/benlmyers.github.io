@@ -2,7 +2,8 @@ main {
     color: white;
 }
 
-pre, blockquote {
+pre,
+blockquote {
     background-color: #222222 !important;
     border-radius: 5px;
 }
@@ -10,6 +11,17 @@ pre, blockquote {
 code {
     color: #bbbbbb !important;
     font-family: 'Noto Sans Mono', monospace !important;
+}
+
+kbd {
+    color: #dddddd !important;
+    background: #444444;
+    padding-left: 3px;
+    padding-right: 3px;
+    border: 1px solid #555555;
+    border-bottom: 2px solid #666666;
+    font-family: 'Noto Sans Mono', monospace !important;
+    border-radius: 3px;
 }
 
 mjx-container {
