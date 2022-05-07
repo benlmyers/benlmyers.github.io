@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<script>window.texme = { style: 'plain' }</script>
+<script src="https://cdn.jsdelivr.net/npm/texme@1.1.0"></script>
+<link rel="stylesheet" href="../../../resources/css/style.css">
+<link rel="stylesheet" href="../../../resources/css/nav.css">
+<link rel="stylesheet" href="../../../resources/css/blog.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap" rel="stylesheet">
+
+<div class="nav">
+    <ul>
+        <li><a href="../../index.html"><b>Ben Myers</b> Blog</a></li>
+        <li>2022</li>
+        <li class="nav-arrow">▶</li>
+        <li>May</li>
+        <li class="nav-arrow">▶</li>
+        <li>Building a Social App with SwiftUI and EasyFirebase</li>
+        <li style="float:right"><a class="active" href="../../../index.html">Portfolio</a></li>
+    </ul>
+</div>
+
+<textarea>
+
+# Building a Social App with SwiftUI and EasyFirebase
+*May 5, 2022*
+
+Topic: **Software Development**
+
+Requisite: **None**
+
+—
+
+# Creating a Social App with SwiftUI and EasyFirebase
+
+*Ben Myers*
+*Written using Xcode 13.3.1 and iOS 15.4*
+
+My name is Ben and I've been coding in Swift for over four years. Today, we'll be building an app, from scratch, called **Talko** where users can chat to a public chatroom anonymously.
+
+This tutorial aims to follow the associated workshop "Creating a Social App with SwiftUI and EasyFirebase". If you get lost during the workshop, everything you need (code, links, etc) to continue is provided here!
+
+## What you'll learn
+
+- Set up your Xcode Project
+- Set up Google Firebase
+- Add Swift Packages
+- Use Google Firestore to host data
+- Create and push data to Firestore
+- Add functionality to your app
+- Design your interface
+
+## Get Started
+
+### Set up your Xcode Project
+
+Open Xcode on your Mac. Create a new project, click the **iOS** tab, then choose **App**. Click **Next**.
+
+![enter image description here](https://i.ibb.co/DPXL30G/Screen-Shot-2022-05-06-at-5-23-09-PM.png)
+
+Enter your app details. Choose a relevant **product name** and **organization identifier** in the form `com.<yourname>`. Xcode will automatically create an identifier called a *bundle identifier* using the product name in the form `com.<yourname>.talko`.
+
+For the remaining dropdowns, choose **SwiftUI** for the interface, and **Swift** for the language. The other checkboxes can be left unchecked. Then click **Next**.
+
+![enter image description here](https://i.ibb.co/mC6c9s4/Screen-Shot-2022-05-06-at-5-27-46-PM.png)
+
+Choose a location for your project. Once you're done, Xcode will open your project.
+
+### Set up Google Firebase
+
+Next, we'll need to prepare Firebase so we can send and receive data. Go to the [Firebase website](https://www.firebase.google.com), sign in with Google, then click **Go to console**.
+
+![enter image description here](https://i.ibb.co/PTYF1sK/Screen-Shot-2022-05-06-at-5-34-41-PM.png)
+
+Create a new project. Name your project **talko**, then click **Continue**. Uncheck the Google Analytics option in Step 2, then click **Continue** once more.
+
+Wait for your project to be ready, then click **Continue**.
+
+![enter image description here](https://i.ibb.co/GVZW7W3/Screen-Shot-2022-05-06-at-5-40-01-PM.png)
+
+Now we'll need to connect your Xcode iOS project to Firebase. If it isn't already shown, click **Project Overview**, then click the **iOS+** (Apple) button.
+
+![enter image description here](https://i.ibb.co/M6svscP/Screen-Shot-2022-05-06-at-5-52-31-PM.png)
+
+Now, you'll need to enter your app's details.  Enter your app's **bundle ID** that you created earlier (in the form `com.<yourname>.talko`). You can skip the other fields. Then click **Register app**.
+
+![enter image description here](https://i.ibb.co/4FJkzz1/Screen-Shot-2022-05-06-at-5-56-34-PM.png)
+
+Next, download **GoogleService-Info.plist**. This plist, or *property list file*, contains information about Firebase that is made available to your app. Then click **Next**.
+
+![enter image description here](https://i.ibb.co/QMZRzd0/Screen-Shot-2022-05-06-at-5-58-27-PM.png)
+
+Once you reach the next step, **Add Firebase SDK**, you can stop here. Click the **close button** (x). This will return you to the project navigator.
+
+![enter image description here](https://i.ibb.co/0MvJhpX/Screen-Shot-2022-05-06-at-6-02-19-PM.png)
+
+In Xcode, you'll need to add `GoogleService_Info.plist` to your project. Open Xcode, and drag the file into the main directory in the project navigator. Check **copy items if needed**, **create folder references**, and your target, **talko**.
+
+![enter image description here](https://i.ibb.co/Dz7kSWs/Screen-Shot-2022-05-06-at-10-48-56-PM.png)
+
+![enter image description here](https://i.ibb.co/jHFD7vX/Screen-Shot-2022-05-06-at-10-43-23-PM.png)
+
+Back in the Firestore console sidebar, choose **Firestore Database**, then click **Create database** to activate your Firestore database.
+
+![enter image description here](https://i.ibb.co/9Vz5hc2/Screen-Shot-2022-05-06-at-5-41-48-PM.png)
+
+Click **Start in test mode**, then **Next**.
+
+![enter image description here](https://i.ibb.co/nDBz6GY/Screen-Shot-2022-05-06-at-6-15-42-PM.png)
+
+Pick a location that you'd like, then click **Enable**.
+
+![enter image description here](https://i.ibb.co/zFRy7Qd/Screen-Shot-2022-05-06-at-6-27-51-PM.png)
+
+You're now ready to use Firestore to send and receive data with your app.
+
+### Add Swift Packages
+
+What's a Swift Package? According to the Apple Developer Documentation,
+
+> Swift packages are **reusable components** of Swift, Objective-C,
+> Objective-C++, C, or C++ code that **developers can use** in their
+> projects. They bundle source files, binaries, and resources in a way
+> that’s easy to use in your app’s project.
+
+Think of Swift Packages like pre-built helper tools and functions to speed up your coding produciton.
+
+Today, we'll be using a single package to speed up the process of working with Firestore Database: **EasyFirebase**.
+
+I happened to write this package, and you can check out it's [source code on Github](https://github.com/Flowductive?type=source).
+
+![enter image description here](https://github.com/Flowductive/easy-firebase/raw/main/Assets/Social%20Preview%20%28640%29.png)
+
+To add this package to your Xcode project, copy the following link:
+```
+https://github.com/Flowductive/easy-firebase
+```
+Now, in Xcode, click **File >> Add Packages...** Then paste the URL into the search bar and press <kbd>enter</kbd>. For the Dependency Rule, choose **Up to Next Major Version**. The version number that defaults afterwards is fine. Click **Add Package**.
+
+![enter image description here](https://i.ibb.co/D8PY0WX/Screen-Shot-2022-05-06-at-6-43-47-PM.png)
+
+Now sit back as your packages load. This will take a few minutes. EasyFirebase has a lot of dependency packages, and all of those packages will load automatically, too.
+
+At some point, you'll receive a pop-up asking you which targets you'd like to add EasyFirebsae to. Ensure the box is checked, then click **Add Package**.
+
+![enter image description here](https://i.ibb.co/Y270Rzm/Screen-Shot-2022-05-06-at-7-13-04-PM.png)
+
+Now, wait for the packages to finish loading. You'll know they're ready when the gray text turns to white in the package list in the *project navigator* (the first tab of the left sidebar), and when you can see the packages' version numbers.
+
+Highlighted on the left is what the list will look like when the packages have completely finished loading:
+
+![enter image description here](https://i.ibb.co/dgTR3sW/Screen-Shot-2022-05-06-at-7-27-35-PM.png)
+
+### Use Google Firestore to host data
+
+Now we can dive into the code. First, we'll need to configure EasyFirebase to work with Firestore. Open **ContentView.swift** using the project navigator. This file contains the `ContentView` structure, or the content that is displayed to the user when the app is opened:
+```swift
+struct ContentView: View {
+	var body: some View {
+		Text("Hello, world!")
+			.padding()
+	}
+}
+```
+We'll need to call EasyFirebase's `configure()` method when this view appears. Add a new line after `.padding()`, and call the `.onAppear { ... }` method:
+```swift
+struct ContentView: View {
+    var body: some View {
+        Text("Hello, world!")
+            .padding()
+            .onAppear { /* ... */ } // <-
+    }
+}
+```
+Before we call any EasyFirebase-provided code, we need to import the package:
+```swift
+import SwiftUI
+import EasyFirebase // <-
+```
+Then, within `onAppear`, call `EasyFirebase.configure()`:
+```swift
+struct ContentView: View {
+    var body: some View {
+        Text("Hello, world!")
+            .padding()
+            .onAppear {
+                EasyFirebase.configure() // <-
+            }
+    }
+}
+```
+Now we proceed to set up the data object that holds all of the users' messages. This will be stored in an object that inherits properties from a class called a `Singleton`.
+
+Find a blank line of code to add your own singleton: `TalkoData`.
+```swift
+class TalkoData: Singleton {
+	// ...
+}
+```
+Note that when you add this code, an error message will appear in your text editor.
+
+![enter image description here](https://i.ibb.co/ygQ9yqb/Screen-Shot-2022-05-06-at-9-09-07-PM.png)
+
+To satisfy the condition that `TalkoData` properly *conform* to `Singleton`'s protocol requirements, we need to add two properties:
+
+- `var id = "TalkoData"`; the id/name of the singleton.
+- `var dateCreated = Date()`; the date the singleton was created.
+
+We'll only have one singleton object in our database for now, and this singleton will hold an *array*, or list, of all the messages sent by our users:
+
+- `var messages = [String]()`; a list of `String` messages sent by the users
+
+Now, our `TalkoData` class is complete. To review, here is how the class should look:
+```swift
+class TalkoData: Singleton {
+    /// The id of the singleton; an auto-generated value.
+    var id = "TalkoData"
+    /// The date the singleton was created (will be the first time you launch the app!)
+    var dateCreated = Date()
+    /// The messages that have been sent by the user.
+    var messages = [String]()
+}
+```
+### Create and push data to Firestore
+
+Before we start creating any messages, we need to put the empty list onto Firestore with a new `TalkoData` object. To do this, we can add a `Button` to our `ContentView`, that, when tapped, will do the job for us.
+
+In your `ContentView`, replace `Text("Hello, world!")` with `VStack { /* ... */ }`. `VStack`s are used to vertically stack user interface (UI) elements, like `Text` or `Button`s.
+```swift
+struct ContentView: View {
+    var body: some View {
+        VStack { /* ... */ }
+            .padding()
+            .onAppear {
+                EasyFirebase.configure()
+            }
+    }
+}
+```
+Inside, we'll add our first element: a `Button` that creates the singleton object and sends it to Firestore.
+```swift
+VStack {
+    Button("Tap me!") {
+        // Do the hard work here...
+    }
+}
+```
+As commented, we still have some hard work to do. Here is the code the button will execute, along with some comments:
+```swift
+// Create the TalkoData object
+let data = TalkoData()
+// Set the data in Firestore as a singleton
+EasyFirestore.Storage.set(data) { error in
+    // If there is an error...
+    if let error = error {
+        // ...print "error"...
+        print("error")
+    } else {
+        // ...otherwise "success!"
+        print("success!")
+    }
+}
+```
+To review, your `ContentView` struct should look like this:
+```swift
+struct ContentView: View {
+    var body: some View {
+        VStack {
+            Button("Tap me!") {
+                let data = TalkoData()
+                EasyFirestore.Storage.set(data) { error in
+                    if let error = error {
+                        print("error")
+                    } else {
+                        print("success!")
+                    }
+                }
+            }
+        }
+            .padding()
+            .onAppear {
+                EasyFirebase.configure()
+            }
+    }
+}
+```
+Now, it's time to run your app. Click the **play button** in the top-left corner of Xcode, or use <kbd>⌘R</kbd>. The app will take a minute to build, so be patient. If you connected to your device with a cord, you can target your iOS device to run the app. Otherwise, by default, your app will run on an Xcode simulator.
+
+When the simulator/app runs, tap or click the button that appears. When that happens, check the Xcode console. You will see a message, either `"error"` or `"success!"`.
+
+![enter image description here](https://i.ibb.co/NT4jbh2/Screen-Shot-2022-05-06-at-11-12-16-PM.png)
+
+If you get an error, check your code. You may have missed a step! Otherwise, if things are successful, we can double-check our data in Firestore. Open your Firebase console, re-open the Firestore section, and check out your data:
+
+![enter image description here](https://i.ibb.co/wRvf41D/Screen-Shot-2022-05-06-at-11-17-16-PM.png)
+
+If it's populated, you're good to go! You may notice that there are no messages yet. That is about to change. We now need to push new data to Firestore, in the form of messages. To achieve this, we need to call additional code that sends a message.
+
+Under the previous `Button`, create a new `Button` named "Send message" with the following action:
+```swift
+// Create a new message to add
+let newMessage = "Hello, world!"
+// Fetch the data singleton from Firestore
+EasyFirestore.Retrieval.get(singleton: "TalkoData", ofType: TalkoData.self) { data in
+    // If the data is fetched successfully, and therefore has a value...
+    if var data = data {
+        // ...add the new message to all the messages.
+        data.messages.append(newMessage)
+        // Then, set the data singleton back in Firestore.
+        EasyFirestore.Storage.set(data)
+    }
+}
+```
+We're now ready to run our program and send our first message. To review, here is the code for `ContentView`:
+```swift
+struct ContentView: View {
+    var body: some View {
+        VStack {
+            Button("Tap me!") {
+                let data = TalkoData()
+                EasyFirestore.Storage.set(data) { error in
+                    if let error = error {
+                        print("error")
+                    } else {
+                        print("success!")
+                    }
+                }
+            }
+            Button("Send message") {
+                let newMessage = "Hello, world!"
+                EasyFirestore.Retrieval.get(singleton: "TalkoData", ofType: TalkoData.self) { data in
+                    if var data = data {
+			            data.messages.append(newMessage)
+			            EasyFirestore.Storage.set(data)
+			        }
+                }
+            }
+        }
+        .padding()
+        .onAppear {
+            EasyFirebase.configure()
+        }
+    }
+}
+```
+Run your code and wait for the app to automatically launch on your target device or simulator. When the view appears, tap **Send message**. In your Firestore console, watch as the `messages` field of the data singleton populates with `"Hello, world!"` messages.
+
+![enter image description here](https://i.ibb.co/r4WnMpH/Screen-Shot-2022-05-07-at-3-35-14-AM.png)
+
+### Add functionality to your app
+
+Now, three functionality aspects of our app remain: the ability to specify the message, the ability to view all posted messages, and the ability to refresh the list of messages.
+
+#### User-inputted message
+
+Let's tackle the first. We can use a `TextField` within `ContentView` to collect user input for our message. We can also use a `Button` to confirm sending the message, like before.
+
+Before we can begin to change our UI elements, we need to prepare some variables to hold *state* information. In view-based coding, state is used to manage when to refresh information displayed to the user.
+
+We'll need two state variables: one variable to hold the user's input for new messages, and one variable to hold all the sent messages from the data singleton. In SwiftUI, we use the `@State` *property wrapper* to tell the app to refresh the view whenever their associated values change.
+
+Within `ContentView`, but before `var body: some View`, add the following variables:
+
+- `@State var myMessage = ""`
+- `@State var allMessages = [String]()`
+
+Next, within `body`, remove the first button, `"Tap me!"`. Replace it with a `TextField`. You can give it any title you'd like, such as `"Your message:"`; then, pass your `myMessage` with *binding* to the text field using the `$` prefix:
+```swift
+TextField("Your message:", text: $myMessage)
+```
+Now, we need to ensure that the inputted message is being added, not `"Hello, world!"`. In the remaining button's action code, remove
+```swift
+let newMessage = "Hello, world!"
+```
+as we no longer need the placeholder message, and change `data.messages.append(newMessage)` to
+```swift
+data.messages.append(myMessage)
+```
+to reflect this change.
+
+😅 Ok, that was a lot of code. Let's review `ContentView` to make sure we have everything.
+```swift
+struct ContentView: View {
+
+    @State var myMessage = ""
+    @State var allMessages = [String]()
+
+    var body: some View {
+        VStack {
+            TextField("Your message:", text: $myMessage)
+            Button("Send message") {
+                let newMessage = "Hello, world!"
+                EasyFirestore.Retrieval.get(singleton: "TalkoData", ofType: TalkoData.self) { data in
+                    if var data = data {
+                        data.messages.append(myMessage)
+                        EasyFirestore.Storage.set(data)
+                    }
+                }
+            }
+        }
+        .padding()
+        .onAppear {
+            EasyFirebase.configure()
+        }
+    }
+}
+```
+#### Display the message list
+
+Now, it's time to display the messages list. We'll have to vertically stack the messages in a list, so our work is cut out for us.
+
+We can use a strategy called *psuedocode* to tackle a situation like this. We want a structure in the form
+```
+All messages:
+newest message
+2nd newest message
+...
+2nd oldest message
+oldest message
+```
+displayed to the user. In psuedocode,
+```
+vertically stack:
+  display "All messages" as text
+  for every MESSAGE in MESSAGES:
+    display MESSAGE as text
+```
+SwiftUI is perfect for handling nested situations like the above. A `VStack` will handle the vertical stack issue, and a `ForEach` view will handle the message iteration. Lastly, we can use our good friend `Text` to display our messages.
+```swift
+VStack {
+    Text("All messages")
+    // Note the .reversed() which puts newer messages first!
+    ForEach(allMessages.reversed(), id: \.self) { message in
+        Text(message)
+    }
+}
+```
+You can put the above chunk of code inside `ContentView`'s first `VStack`, below the end of the send message button. To review, we have
+```swift
+var body: some View {
+    VStack {
+        TextField("Your message:", text: $myMessage)
+        Button("Send message") {
+            // ...
+        }
+        VStack {
+            Text("All messages")
+            ForEach(allMessages.reversed(), id: \.self) { message in
+                Text(message)
+            }
+        }
+    }
+    // ...
+}
+```
+#### Refresh the list
+
+Finally, we need to be able to refresh the list. A new button named `"Refresh messages"` can handle this, and it's action code retrieves the lastest version of the data and stores the messages locally in state:
+```swift
+Button("Refresh messages") {
+    EasyFirestore.Retrieval.get(singleton: "TalkoData", ofType: TalkoData.self) { data in
+        if let data = data {
+            allMessages = data.messages
+        }
+    }
+}
+```
+This button can be placed anywhere, but it's recommended to be place after your send message button.
+
+And our app is functional! Run your code, and check out your app in action.
+
+![enter image description here](https://i.ibb.co/JCHTxPV/Screen-Shot-2022-05-07-at-4-10-39-AM.png)
+
+### Stopping point
+
+This is a great place to stop and think about the different types of applications you can make using these methods. As you can see, working with data can be easy and fun! It is exciting to think of the possibilities of what can be created when you have tools like this available, and that is the goal of packages like EasyFirebase-- to make database jargon easier, so coders of all skill levels can have increased potential.
+
+If you've ran into trouble, fear not. You can check out the full [ContentView.swift](https://github.com/benlmyers/talko/blob/716adb2727d34a285bd4600649f928d4d41c85b1/talko/ContentView.swift) file of this project on Github, and update your code if needed.
+
+### Design your interface
+
+Now comes the fun part-- making your app look great. Now's your chance to take some creative license. Here are a few tips on how to improve your app's interface:
+
+**Try going horizontal.** The `HStack` is a great tool for stacking UI elements horizontally.
+```swift
+HStack {
+	Text("View A")
+	Button("View B") { ... }
+}
+```
+**Change the colors around.** You can use *view modifiers* to change the appearance of a view, including it's colors.
+```swift
+Text("Hello, red!").foregroundColor(.red)
+Text("Goodbye, blue!").background(Color.blue)
+```
+**Space out.** Stacking elements can include spacing specifications. You can also use the `Spacer` element to space out UI:
+```swift
+// A <-> B: 25.0 units spacing
+// B <-> C: 10.0 units spacing
+VStack(spacing: 10.0) {
+	Text("View A")
+	Spacer().frame(height: 15.0)
+	Text("View B")
+	Text("View C")
+}
+```
+Check out these modifications to `ContentView`:
+```swift
+struct ContentView: View {
+
+    @State var myMessage = ""
+    @State var allMessages = [String]()
+
+    var body: some View {
+        // Add spacing to every item in the vertical stack
+        VStack(spacing: 12.0) {
+            // Add a proud title to the app
+            Text("🌮 Talko!")
+                .font(.title)
+                .fontWeight(.black)
+            // Stack the text input and submit button next to each other horizontally
+            HStack {
+                TextField("🗣 Your message:", text: $myMessage)
+                // Change "Send message" -> "Send"
+                Button("Send") {
+                    EasyFirestore.Retrieval.get(singleton: "TalkoData", ofType: TalkoData.self) { data in
+                        if var data = data {
+                            data.messages.append(myMessage)
+                            EasyFirestore.Storage.set(data)
+                        }
+                    }
+                }
+            }
+            // Add a horizontal rule divider
+            Divider()
+            Button("Refresh messages") {
+                EasyFirestore.Retrieval.get(singleton: "TalkoData", ofType: TalkoData.self) { data in
+                    if let data = data {
+                        allMessages = data.messages
+                    }
+                }
+            }
+            // Add some padding around the view
+            .padding()
+            // Make all the messages scrollable
+            ScrollView {
+                VStack(spacing: 12.0) {
+                    // Make the header text bold and yellow
+                    Text("All messages 📨").bold().foregroundColor(.yellow)
+                    ForEach(allMessages.reversed(), id: \.self) { message in
+                        // Make all the messages gray
+                        Text(message).foregroundColor(.gray)
+                    }
+                }
+            }
+        }
+        .padding()
+        .onAppear {
+            EasyFirebase.configure()
+        }
+    }
+}
+```
+And here's how the app looks with these changes:
+
+![enter image description here](https://i.ibb.co/LPkMMYq/Screen-Shot-2022-05-07-at-4-33-12-AM.png)
+
+Not too shabby! And the list of messages is scrollable, too, as the `VStack` holding all the messages was wrapped in a `ScrollView` element.
+
+For more tips on design guidelines, check out this [helpful tutorial by Apple](https://developer.apple.com/tutorials/swiftui#app-design-and-layout).
+
+## Congrats, you're done!
+
+You've built a simple social app that anyone can open on their phone and contribute messages to! If you have the time, try to tackle a few related challenges:
+
+- Automatically refresh the list when the app opens, and when a new message is sent
+- Display the messages in random colors
+- Add timestamps to each message, and display those timestamps along with each message
+
+You can reference the completed project [here](https://github.com/benlmyers/talko).
+
+## Further reading
+
+If you found this tutorial helpful, check out these other guides I wrote on learning more app+database coding:
+
+- Use [this tutorial](https://github.com/Flowductive/easy-firebase/wiki/Get-Started-with-EasyAuth) to add email authentication to your app, so users need to log in before sending messages
+- Use [this tutorial](https://github.com/Flowductive/easy-firebase/wiki/Get-Started-with-EasyFirestore) to work with more complex data types in Firestore
+
+I'm a college student working on my own with these packages, and you can support my by [starring the package on Github](https://github.com/Flowductive/easy-firebase)!
+
+![GitHub Repo stars](https://img.shields.io/github/stars/Flowductive/easy-firebase?color=yellow)
